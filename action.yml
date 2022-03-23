@@ -11,10 +11,10 @@ inputs:
 
 runs:
   using: "composite"
-  env:
-    SLACK_WEBHOOK_URL: ${{ inputs.webhook_url }}
   steps:
-    - uses: adamkdean/simple-slack-notify@master
+    - uses: adamkdean/simple-slack-notify@v1.1.2
+      env:
+        SLACK_WEBHOOK_URL: ${{ inputs.webhook_url }}
       with:
         status: ${{ inputs.status }}
         success_text: "${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) ferdig"
