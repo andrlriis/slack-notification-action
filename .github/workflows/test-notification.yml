@@ -1,0 +1,16 @@
+name: Test notifikasjon
+
+on:
+  workflow_dispatch:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Slack notification
+        if: always()
+        uses: andrlriis/slack-notification-action@master
+        with:
+          status: ${{ job.status }}
+          webhook_url: ${{ secrets.RIIS_BYGGSTATUS_WEBHOOK_URL }}
