@@ -13,4 +13,4 @@ jobs:
         uses: andrlriis/slack-notification-action@master
         with:
           status: ${{ job.status }}
-          webhook_url: ${{ secrets.RIIS_BYGGSTATUS_WEBHOOK_URL }}
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
