@@ -15,12 +15,13 @@ runs:
     - uses: adamkdean/simple-slack-notify@v1.1.2
       env:
         SLACK_WEBHOOK_URL: ${{ inputs.webhook_url }}
-        RUN_URL: "https://github.com/${env.GITHUB_REPOSITORY}/actions/runs/${ env.GITHUB_RUN_ID }""
+        RUN_URL: "${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/actions/runs/${env.GITHUB_RUN_ID}""
       with:
         status: ${{ inputs.status }}
-        success_text: "[${env.GITHUB_REPOSITORY}] [${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) ferdig](${env.RUN_URL})"
-        failure_text: "[${env.GITHUB_REPOSITORY}] [${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) feilet](${env.RUN_URL})"
-        cancelled_text: "[${env.GITHUB_REPOSITORY}] [${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) ble avbrutt](${env.RUN_URL})"
+        success_text: "[${env.GITHUB_REPOSITORY}] ${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) ferdig"
+        failure_text: "[${env.GITHUB_REPOSITORY}] ${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) feilet"
+        cancelled_text: "[${env.GITHUB_REPOSITORY}] ${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) ble avbrutt"
         fields: |
           [{ "title": "Repository", "value": "${env.GITHUB_REPOSITORY}", "short": true},
-          {"title": "Branch", "value": "${env.BRANCH}", "short": true}]
+          {"title": "Branch", "value": "${env.BRANCH}", "short": true},
+          {"title": "Lenke til run", "value": "${env.RUN_URL}", "short": true}]
