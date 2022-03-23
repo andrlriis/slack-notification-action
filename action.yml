@@ -1,0 +1,25 @@
+name: "Send Slack-notifikasjon"
+description: "Send en fint formatert Slack-notifikasjon med status for et GitHub Actions workflow-run"
+
+inputs:
+  status:
+    description: "Status på jobben (hentes fra jobs.status)"
+    required: true
+  webhook_url:
+    description: "Slack Webhook som varsel skal sendes til"
+    required: true
+
+runs:
+  using: "composite"
+  env:
+    SLACK_WEBHOOK_URL: ${{ inputs.webhook_url }}
+  steps:
+    - uses: adamkdean/simple-slack-notify@master
+      with:
+        status: ${{ inputs.status }}
+        success_text: "${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) ferdig"
+        failure_text: "${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) feilet"
+        cancelled_text: "${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) ble avbrutt"
+        fields: |
+        [{ "title": "Repository", "value": "${env.GITHUB_REPOSITORY}", "short": true}],
+        {"title": "Branch", "value": "${env.BRANCH}", "short": true}]
