@@ -17,9 +17,9 @@ runs:
         SLACK_WEBHOOK_URL: ${{ inputs.webhook_url }}
       with:
         status: ${{ inputs.status }}
-        success_text: "[${env.GITHUB_REPOSITORY}] ${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) ferdig"
-        failure_text: "[${env.GITHUB_REPOSITORY}] ${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) feilet"
-        cancelled_text: "[${env.GITHUB_REPOSITORY}] ${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) ble avbrutt"
+        success_text: "[${github.event.repository.name}] ${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) ferdig"
+        failure_text: "[${github.event.repository.name}] ${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) feilet"
+        cancelled_text: "[${github.event.repository.name}] ${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) ble avbrutt"
         fields: |
           [{ "title": "Repository", "value": "${env.GITHUB_REPOSITORY}", "short": true},
           {"title": "Branch", "value": "${env.BRANCH}", "short": true}]
