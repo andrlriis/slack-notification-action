@@ -15,7 +15,7 @@ runs:
     - uses: adamkdean/simple-slack-notify@v1.1.2
       env:
         SLACK_WEBHOOK_URL: ${{ inputs.webhook_url }}
-        RUN_URL: https://github.com/${{env.GITHUB_REPOSITORY}}/actions/runs/${{ env.GITHUB_RUN_ID }}
+        RUN_URL: "https://github.com/${env.GITHUB_REPOSITORY}/actions/runs/${ env.GITHUB_RUN_ID }""
       with:
         status: ${{ inputs.status }}
         success_text: "[${env.GITHUB_REPOSITORY}] [${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) ferdig](${env.RUN_URL})"
