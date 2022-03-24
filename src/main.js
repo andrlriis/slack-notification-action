@@ -37,13 +37,13 @@ webhook.send({
       color: color,
       fields: [
         {
-          title: "Status",
-          value: status,
+          title: "Repository",
+          value: fullRepositoryName,
           short: true,
         },
         {
-          title: "Repository",
-          value: fullRepositoryName,
+          title: "Status",
+          value: status,
           short: true,
         },
       ],
