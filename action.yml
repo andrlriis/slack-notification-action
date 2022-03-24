@@ -10,16 +10,17 @@ inputs:
     required: true
 
 runs:
-  using: "composite"
-  steps:
-    - uses: adamkdean/simple-slack-notify@v1.1.2
-      env:
-        SLACK_WEBHOOK_URL: ${{ inputs.webhook_url }}
-      with:
-        status: ${{ inputs.status }}
-        success_text: "[${env.GITHUB_REPOSITORY}] ${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) ferdig"
-        failure_text: "[${env.GITHUB_REPOSITORY}] ${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) feilet"
-        cancelled_text: "[${env.GITHUB_REPOSITORY}] ${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) ble avbrutt"
-        fields: |
-          [{ "title": "Repository", "value": "${env.GITHUB_REPOSITORY}", "short": true},
-          {"title": "Lenke", "value": "${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/actions/runs/${env.GITHUB_RUN_ID}", "short": true}]
+  using: "node16"
+  main: "src/main.js"
+  # steps:
+  #   - uses: adamkdean/simple-slack-notify@v1.1.2
+  #     env:
+  #       SLACK_WEBHOOK_URL: ${{ inputs.webhook_url }}
+  #     with:
+  #       status: ${{ inputs.status }}
+  #       success_text: "[${env.GITHUB_REPOSITORY}] ${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) ferdig"
+  #       failure_text: "[${env.GITHUB_REPOSITORY}] ${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) feilet"
+  #       cancelled_text: "[${env.GITHUB_REPOSITORY}] ${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) ble avbrutt"
+  #       fields: |
+  #         [{ "title": "Repository", "value": "${env.GITHUB_REPOSITORY}", "short": true},
+  #         {"title": "Lenke", "value": "${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/actions/runs/${env.GITHUB_RUN_ID}", "short": true}]
