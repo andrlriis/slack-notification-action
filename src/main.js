@@ -25,9 +25,9 @@ const suffix = {
   success: `ferdig`,
   failure: `feilet`,
   cancelled: `ble avbrutt`,
-};
+}[status];
 
-const text = `\\[${repositoryName}\\] ${workflowName} (${runNumber}) ${suffix}`;
+const text = `[${repositoryName}] ${workflowName} (${runNumber}) ${suffix}`;
 
 webhook.send({
   attachments: [
