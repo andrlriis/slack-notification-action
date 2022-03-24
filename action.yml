@@ -22,5 +22,4 @@ runs:
         cancelled_text: "[${env.GITHUB_REPOSITORY}] ${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) ble avbrutt"
         fields: |
           [{ "title": "Repository", "value": "${env.GITHUB_REPOSITORY}", "short": true},
-          {"title": "Branch", "value": "${env.BRANCH}", "short": true},
           {"title": "Lenke", "value": "${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/actions/runs/${env.GITHUB_RUN_ID}", "short": true}]
