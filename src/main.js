@@ -34,7 +34,7 @@ webhook.send({
     {
       text: {
         type: "mrkdwn",
-        text: suffix,
+        text: text,
       },
       color: color,
       fields: [
