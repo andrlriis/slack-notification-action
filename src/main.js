@@ -27,15 +27,13 @@ const suffix = {
   cancelled: `ble avbrutt`,
 };
 
-const text = `\\[${repositoryName}\\] [${workflowName} (${runNumber}) ${suffix}](${runUrl})`;
+const text = `\\[${repositoryName}\\] ${workflowName} (${runNumber}) ${suffix}`;
 
 webhook.send({
   attachments: [
     {
-      text: {
-        type: "mrkdwn",
-        text: text,
-      },
+      title: text,
+      title_link: runUrl,
       color: color,
       fields: [
         {
