@@ -17,3 +17,4 @@ jobs:
         with:
           status: ${{ job.status }}
           webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          environment: Test
