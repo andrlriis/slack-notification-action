@@ -1,8 +1,9 @@
 const core = require("@actions/core");
 const { IncomingWebhook } = require("@slack/webhook");
 
-const url = core.getInput("webhook_url");
-const status = core.getInput("status");
+const url = core.getInput("webhook_url", { required: true });
+const status = core.getInput("status", { required: true });
+const environment = core.getInput("environment", { required: false });
 
 const fullRepositoryName = process.env.GITHUB_REPOSITORY;
 const repositoryOwner = fullRepositoryName.split("/")[0];
@@ -29,24 +30,34 @@ const suffix = {
 
 const text = `[${repositoryName}] ${workflowName} (${runNumber}) ${suffix}`;
 
+const fields = [
+  {
+    title: "Repository",
+    value: fullRepositoryName,
+    short: true,
+  },
+  {
+    title: "Status",
+    value: status,
+    short: true,
+  },
+];
+
+if (environment) {
+  fields.push({
+    title: "Environment",
+    value: environment,
+    short: true,
+  });
+}
+
 webhook.send({
   attachments: [
     {
       title: text,
       title_link: runUrl,
       color: color,
-      fields: [
-        {
-          title: "Repository",
-          value: fullRepositoryName,
-          short: true,
-        },
-        {
-          title: "Status",
-          value: status,
-          short: true,
-        },
-      ],
+      fields,
     },
   ],
 });
