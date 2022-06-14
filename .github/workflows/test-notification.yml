@@ -11,10 +11,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Send Slack notification
+      - name: Send Slack notification with environment
         if: always()
         uses: andrlriis/slack-notification-action@master
         with:
           status: ${{ job.status }}
           webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
           environment: Test
+
+      - name: Send Slack notification without environment
+        if: always()
+        uses: andrlriis/slack-notification-action@master
+        with:
+          status: ${{ job.status }}
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
