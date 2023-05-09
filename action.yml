@@ -8,6 +8,9 @@ inputs:
   webhook_url:
     description: "Slack Webhook som varsel skal sendes til"
     required: true
+  environment:
+    description: "Miljø som action har blitt kjørt for"
+    required: false
 
 runs:
   using: "node16"
